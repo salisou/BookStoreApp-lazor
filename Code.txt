@@ -1,0 +1,18 @@
+﻿scaffold-DbContext 'Server=localhost\sqlexpress;Database=BookStoreDb;Integrated Security=True;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True' Microsoft.EntityFrameworkCore.SqlServer -ContextDir Data -OutputDir Data
+
+un altra maniera di create 
+ Add-Migration AddCodeFirstTable
+ Update database 
+
+ _____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+ Due to a change in Entity Framework Core 7, you will get the following error when attempting to scaffold.
+
+    A connection was successfully established with the server, but then an error occurred during the login process. (provider: SSL Provider, error: 0 - The certificate chain was issued by an authority that is not trusted.)
+
+Solution
+
+Add Encrypt=False to the connection string as seen below:
+
+'Server=localhost\\sqlexpress; Database=BookStoreDb; Trusted_Connection=true; MultipleActiveResultSets=true;Encrypt=False' Microsoft.EntityFrameworkCore.SqlServer 
+ _____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+
