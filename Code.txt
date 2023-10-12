@@ -16,3 +16,18 @@ Add Encrypt=False to the connection string as seen below:
 'Server=localhost\\sqlexpress; Database=BookStoreDb; Trusted_Connection=true; MultipleActiveResultSets=true;Encrypt=False' Microsoft.EntityFrameworkCore.SqlServer 
  _____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
+ Insert Authors in json
+
+ {
+  "firstName": "David",
+  "lastName": "Stramn",
+  "bio": "First Author"
+}
+============================================================================
+
+{
+  "Id": 29
+  "firstName": "TEST",
+  "lastName": "Author",
+  "bio": "This is a test to see if ID Will get processed"
+}
