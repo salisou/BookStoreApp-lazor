@@ -8,6 +8,7 @@ global using bookstoreApp.Api.Static;
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.AspNetCore.Http;
 global using System.Collections.Generic;
+global using bookstoreApp.Api.Models.Book;
 global using Microsoft.EntityFrameworkCore;
 global using bookstoreApp.Api.Models.Author;
 global using bookstoreApp.Api.Configurations;
