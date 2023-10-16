@@ -13,6 +13,7 @@ namespace bookstoreApp.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class BooksController : ControllerBase
     {
         private readonly BookStoreDbContext _context;
@@ -77,6 +78,7 @@ namespace bookstoreApp.Api.Controllers
         // PUT: api/Books/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> PutBook(int id, BookUpdateDto bookDto)
         {
             if (id != bookDto.Id)
@@ -130,6 +132,7 @@ namespace bookstoreApp.Api.Controllers
         // POST: api/Books
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<BookCreateDto>> PostBook(BookCreateDto bookDto)
         {
             if (_context.Books == null)
@@ -156,6 +159,7 @@ namespace bookstoreApp.Api.Controllers
 
         // DELETE: api/Books/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> DeleteBook(int id)
         {
             // Verifica se la collezione di libri (_context.Books) è nulla

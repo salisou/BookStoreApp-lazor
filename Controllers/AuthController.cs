@@ -2,7 +2,7 @@
 {
     [Route("api/[controller]")]
     [ApiController]
-
+    [AllowAnonymous]
     //L'attributo [Authorize] in ASP.NET Core viene utilizzato per proteggere
     //le risorse o i metodi delle API da accessi non autorizzati.
     //Quando applicato a una classe di controller o a un metodo di azione,
@@ -27,32 +27,41 @@
         [Route("register")]
         public async Task<IActionResult> Register(UserDto userDto)
         {
+            // Registra un tentativo di registrazione utente nei log
             logger.LogInformation($"Registration Attempt for {userDto.Email} ");
             
             try
             {
-                var user = mapper.Map<ApiUser>(userDto);
-                user.UserName = userDto.Email;
-                var result = await userManager.CreateAsync(user, userDto.Password);
+                var user = mapper.Map<ApiUser>(userDto); // / Mappa i dati utente dal DTO all'entità ApiUser
+                user.UserName = userDto.Email; // Imposta il nome utente come l'indirizzo email
+                var result = await userManager.CreateAsync(user, userDto.Password);  // Crea un nuovo utente utilizzando il UserManager
 
+                // Verifica se la creazione dell'utente ha avuto successo
                 if (result.Succeeded == false)
                 {
+                    // Aggiunge eventuali errori di creazione all'ModelState
                     foreach (var error in result.Errors)
                     {
                         ModelState.AddModelError(error.Code, error.Description);
                     }
 
+                    // Restituisce un BadRequest con i dettagli degli errori di validazione
                     return BadRequest(ModelState);
                 }
 
+                // Aggiunge l'utente al ruolo "User"
                 await userManager.AddToRoleAsync(user, "User");
 
+                // Restituisce un Accepted (HTTP 202) per indicare una registrazione riuscita
                 return Accepted();
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, $"Something Went Worng in the {nameof(Register)}");
-                return Problem($"Something Went Worng in the {nameof(Register)}", statusCode: 500);
+                // Registra un errore generico nel caso in cui si verifichi un'eccezione
+                logger.LogError(ex, $"Something Went Wrong in the {nameof(Register)}");
+
+                // Restituisce una risposta di problema con uno stato HTTP 500 (Internal Server Error)
+                return Problem($"Something Went Wrong in the {nameof(Register)}", statusCode: 500);
             }
         }
 

@@ -47,3 +47,14 @@ Add Encrypt=False to the connection string as seen below:
   "lastName": "From Api",
   "role": "User"
 }
+
+// Post Book code json
+
+{
+  "title": "prova del progetto",
+  "year": 1987,
+  "isbn": "SEMPEL ISBN",
+  "summary": "SEMPEL SUMMRY",
+  "image": "",
+  "price": 36
+}
