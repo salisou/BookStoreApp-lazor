@@ -31,3 +31,19 @@ Add Encrypt=False to the connection string as seen below:
   "lastName": "Author",
   "bio": "This is a test to see if ID Will get processed"
 }
+
+
+// Login code json
+{
+  "email": "user@bookstore.com",
+  "password": "P@ssword1"
+}
+
+// registration code
+{
+  "email": "1@bookstore.com",
+  "password": "P@ssword1",
+  "firstName": "Test",
+  "lastName": "From Api",
+  "role": "User"
+}

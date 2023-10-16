@@ -37,6 +37,10 @@
 
             #endregion
 
+
+            #region User
+            CreateMap<ApiUser, UserDto>().ReverseMap();
+            #endregion
         }
     }
 }
